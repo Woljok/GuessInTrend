@@ -16,9 +16,32 @@ def index():
     myresult = db.cursor.fetchall()
     return render_template("index.html",data=myresult)
 
-@app.route("/login")
+
+
+
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    return render_template("login.html")
+    message = ''
+    if request.method == "GET":
+        return render_template("login.html")
+    else:
+        username = request.form("username")
+        password = request.form("password")
+        if username and password:
+            query = "SELECT * FROM mydb.user WHERE username = \"" + username + "\""
+            db.cursor.execute(query)
+            passChecker = db.cursor.fetchone()
+            if passChecker:
+                if passChecker[3] == password:
+                else:    
+            
+            else:
+                message = 'BU KULLANICI ADIYLA BİR KAYIT BULUNAMADI.'
+                return render_template("login.html", message)
+        else:
+            flash("EKSİK DOLDURDUNUZ","danger")
+            return render_template("login.html")
+
 
 @app.route("/register")
 def register():
