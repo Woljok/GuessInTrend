@@ -25,30 +25,77 @@ def login():
     if request.method == "GET":
         return render_template("login.html")
     else:
-        if request.form.get("login_form"):
-            username = request.form("username")
-            password = request.form("password")
-            if username and password:
-                query = "SELECT * FROM mydb.user WHERE username = \"" + username + "\""
-                db.cursor.execute(query)
-                userChecker = db.cursor.fetchone()
-                if userChecker:
-                    if userChecker[3] == password:
-                        session[userId] = userChecker[0]
-                        session[username] = userChecker[1] 
-                    else:    
-                        return render_template("login.html",message = 'ŞİFRE YANLIŞ, TEKRAR DENEYİNİZ.')
-                else:
-                    return render_template("login.html", message = 'BU KULLANICI ADIYLA BİR KAYIT BULUNAMADI')
+        nickname = request.form.get("nickname")
+        password = request.form.get("password")
+        if nickname is not None:
+            print(nickname)
+            query = "SELECT * FROM mydb.user WHERE nickname = \"" + nickname + "\""
+            db.cursor.execute(query)
+            userChecker = db.cursor.fetchone()
+            if userChecker:
+                if userChecker[3] == password:
+                    session["logged"] = True
+                    session["idUser"] = userChecker[0]
+                    session["nickname"] = userChecker[1] 
+                    return redirect(url_for("home.html"))
+                else:    
+                    return render_template("login.html",message = 'ŞİFRE YANLIŞ, TEKRAR DENEYİNİZ.')
             else:
-                return render_template("login.html", message = 'EKSİK DOLDURDUNUZ')
+                return render_template("login.html", message = 'BU KULLANICI ADIYLA BİR KAYIT BULUNAMADI, KAYIT OLMAK İSTER MİSİNİZ?')
         else:
-            message = 'YO WTF'
-            return render_template("login.html", message = 'YO WTF')
+            return render_template("login.html", message = 'EKSİK DOLDURDUNUZ')
 
-@app.route("/register")
+
+@app.route("/register", methods=["POST","GET"])
 def register():
-    return render_template("register.html")
+    message =''
+    if request.method == "GET":
+        return render_template("register.html")
+    else:
+        nickname = request.form.get("nickname")
+        password = request.form.get("password")
+        password2 = request.form.get("password2")
+        fullname = request.form.get("fullname")
+        mail = request.form.get("mail")
+        age = request.form.get("age")
+        if password2 != password:
+            return render_template("register.html", message='ŞİFRELER EŞLEŞMİYOR. TEKRAR DENEYİNİZ..')
+        query = "SELECT * FROM mydb.user WHERE mail = \"" + mail + "\""
+        db.cursor.execute(query)
+        checkMail = db.cursor.fetchone()
+        if checkMail is not None:
+            return render_template("register.html", message='BU MAİLLE BİR KAYIT ZATEN VAR.')
+        query = "SELECT * FROM mydb.user WHERE nickname = \"" + nickname+ "\""
+        db.cursor.execute(query)
+        checkUser = db.cursor.fetchone()
+        if checkUser is not None:
+            return render_template("register.html", message="BU KULLANICI ADI KULLANIMDA")
+        if age != '':
+            if mail != '':
+                query = "INSERT INTO mydb.user (nickname, fullname, password, mail, age) VALUES (%s,%s,%s,%s,%s)"
+                val = (nickname, fullname, password, mail, age)
+                db.cursor.execute(query, val)
+                db.con.commit()
+            else:
+                query = "INSERT INTO mydb.user (nickname, fullname, password, age) VALUES (%s,%s,%s,%s)"
+                val = (nickname, fullname, password, age)
+                db.cursor.execute(query, val)
+                db.con.commit()
+        else:
+            if mail != '':
+                query = "INSERT INTO mydb.user (nickname, fullname, password, mail) VALUES (%s,%s,%s,%s)"
+                val = (nickname, fullname, password, mail)
+                db.cursor.execute(query, val)
+                db.con.commit()
+            else:
+                query = "INSERT INTO mydb.user (nickname, fullname, password) VALUES (%s,%s,%s)"
+                vals = (nickname, fullname, password)
+                db.cursor.execute(query, vals)
+                db.con.commit()
+        return render_template("register.html", message = "BAŞARIYLA KAYIT OLDUNUZ")
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
