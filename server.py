@@ -25,23 +25,26 @@ def login():
     if request.method == "GET":
         return render_template("login.html")
     else:
-        username = request.form("username")
-        password = request.form("password")
-        if username and password:
-            query = "SELECT * FROM mydb.user WHERE username = \"" + username + "\""
-            db.cursor.execute(query)
-            passChecker = db.cursor.fetchone()
-            if passChecker:
-                if passChecker[3] == password:
-                else:    
-            
+        if request.form.get("login_form"):
+            username = request.form("username")
+            password = request.form("password")
+            if username and password:
+                query = "SELECT * FROM mydb.user WHERE username = \"" + username + "\""
+                db.cursor.execute(query)
+                userChecker = db.cursor.fetchone()
+                if userChecker:
+                    if userChecker[3] == password:
+                        session[userId] = userChecker[0]
+                        session[username] = userChecker[1] 
+                    else:    
+                        return render_template("login.html",message = 'ŞİFRE YANLIŞ, TEKRAR DENEYİNİZ.')
+                else:
+                    return render_template("login.html", message = 'BU KULLANICI ADIYLA BİR KAYIT BULUNAMADI')
             else:
-                message = 'BU KULLANICI ADIYLA BİR KAYIT BULUNAMADI.'
-                return render_template("login.html", message)
+                return render_template("login.html", message = 'EKSİK DOLDURDUNUZ')
         else:
-            flash("EKSİK DOLDURDUNUZ","danger")
-            return render_template("login.html")
-
+            message = 'YO WTF'
+            return render_template("login.html", message = 'YO WTF')
 
 @app.route("/register")
 def register():
