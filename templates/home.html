@@ -13,10 +13,14 @@
   <body>
       <div class=row>
         <div class="col-sm-3 col-md-6 col-lg-6">
-            <h1>asdadsa</h1>
+            <h1>{{boolUser}}/h1>
         </div>
         <div class="col-sm-3 col-md-6 col-lg-6">
-
+          {% if boolUser == True%}
+          <a href="{{ url_for('profile', userNickname = nickname)}}">Profile</a>
+          {%else%}
+          <a href="{{ url_for('error')}}">Profile</a>
+          {%endif%}
         </div>
       </div>
 
