@@ -22,7 +22,7 @@ def home_page():
         boolUser = True
         return render_template("home.html", boolUser= boolUser, nickname = session["nickname"])
     else:
-        return render_template("home.html", boolUser=boolUser)
+        return render_template("home.html", boolUser= boolUser)
    
 
 
@@ -135,11 +135,11 @@ def login():
                     session.permanent = True 
                     return redirect(url_for("home_page"))
                 else:    
-                    return render_template("login.html",message = 'ŞİFRE YANLIŞ, TEKRAR DENEYİNİZ.')
+                    return render_template("login.html",message = 1)
             else:
-                return render_template("login.html", message = 'BU KULLANICI ADIYLA BİR KAYIT BULUNAMADI, KAYIT OLMAK İSTER MİSİNİZ?')
+                return render_template("login.html", message = 2)
         else:
-            return render_template("login.html", message = 'EKSİK DOLDURDUNUZ')
+            return render_template("login.html", message = 3)
 
 
 @app.route("/register", methods=["POST","GET"])
