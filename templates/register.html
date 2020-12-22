@@ -1,33 +1,46 @@
-<div class="form-area">
+{% extends "layout.html" %}
+{% block title %}Register{% endblock %}
+{% block content%}
+<div class="container-register">
 <form id="register_form" action="" method="POST">
-    <div class="form_input">
-        <label for="nickname" class="label">Nickname/Username: </label>
-        <input type="text" name="nickname" placeholder="Username, required" required>
+    <div class="form-register">
+        <h2>Register for unlimited fun!</h2>
+        <div>
+        <input class="formInput-register" autocomplete="off" type="text" name="nickname" required="">
+        <label for="nickname" class="label-register">Nickname</label>
+        </div>
+        <div>
+        
+        <input class="formInput-register" autocomplete="off" type="text" name="fullname">
+        <label for="fullname" class="label-register">Fullname, not required</label>
+        </div>
+        
+        <div>
+        <input class="formInput-register" autocomplete="off" type="password" name="password" required>
+        <label for="password" class="label-register">Password</label>
+        </div>
+        
+        <div>
+        <input class="formInput-register" autocomplete="off" type="password" name="password2"required>
+        <label for="password2" class="label-register">Password again</label>
+        </div>
+
+        <div>
+        <input class="formInput-register" autocomplete="off" type="email" name="mail" required>
+        <label for="mail" class="label-register">Mail</label>
+        </div>
+        <div>
+        <input class="formInput-register" autocomplete="off" type="number" name="age">
+        <label for="age" class="label-register" title="Age">Age, not required</label>
+        </div>
+    <button class="formInput-register-submit"  type="submit">Register!</button>
     </div>
-    <div class="form_input">
-        <label for="fullname" class="label">Fullname: </label>
-        <input type="text" name="fullname" placeholder="Fullname, not required">
-    </div>
-    <div class="form_input">
-        <label for="password" class="label">Password: </label>
-        <input type="password" name="password" placeholder="Password, required" required>
-    </div>
-    <div class="form_input">
-        <label for="password2" class="label">Password Again: </label>
-        <input type="password" name="password2" placeholder="Password, required" required>
-    </div>
-    <div class="form_input">
-        <label for="mail" class="label">Mail: </label>
-        <input type="email" name="mail" placeholder="Email, required" required>
-    </div>
-    <div class="form_input">
-        <label for="age" class="label">Age: </label>
-        <input type="number" name="age" placeholder="Age, not required">
-    </div>
-    <button type="submit">Register Now!</button>
 </form>
-</div>
+<div class="errorMessage"></div>
 <h1>{{message}}</h1>
 {% if message == 'BAŞARIYLA KAYIT OLDUNUZ' %}
 <h1><a href="{{ url_for('login') }}"> Giriş yap</a></h1>
 {%endif%}
+</div>
+</div>
+{%endblock%}
