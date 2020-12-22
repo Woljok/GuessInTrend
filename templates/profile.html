@@ -1,8 +1,24 @@
-<h1> user_id = {{profile[0]}}</h1>
-<h1> userName = {{profile[1]}}</h1>
-<h1> fullName = {{profile[2]}}</h1>
-<h1> mail = {{profile[4]}}</h1>
-<h1> age = {{profile[5]}}</h1>
-<h1> coin = {{profile[6]}}</h1>
+{%extends "layout.html" %}
+{% block title %}Login{% endblock %}
+{% block content%}
+<div class="container-editProfile">
+    <div class="container-inside-editProfile">
+    <div id="profileHeader"><h1>Profile </h1></div>
+    <div class="editProfile-item"> <label for="nickname">User ID: </label><h2> 	&nbsp	&nbsp{{profile[0]}}</h2></div>
+    <div class="editProfile-item"> <label for="nickname">Nickname: </label><h2> 	&nbsp	&nbsp{{profile[1]}}</h2></div>
+    <div class="editProfile-item"> <label for="fullname">Fullname: </label><h2> 	&nbsp	&nbsp{{profile[2]}}</h2></div>
+    <div class="editProfile-item"> <label for="mail">Mail: </label><h2> 	&nbsp	&nbsp{{profile[4]}}</h2></div>
+    <div class="editProfile-item"> <label for="age">Age: </label><h2> 	&nbsp	&nbsp{{profile[5]}}</h2></div>
+    <div class="editProfile-item"> <label for="coin">Coin: </label><h2> 	&nbsp	&nbsp{{profile[6]}}</h2></div>
+    <div id="editProfile-button-border"><a href="{{url_for('editProfile', userNickname = profile[1])}}" class="btn btn-primary">Edit your profile!</a></div>
+    </div>
 
-<a href="{{url_for('editProfile', userNickname = profile[1])}}" class="btn btn-primary">Edit</a>
+
+
+
+
+
+
+</div>
+
+{%endblock%}
