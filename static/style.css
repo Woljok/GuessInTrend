@@ -1,23 +1,242 @@
- /* -------------------------------------- NAV ----------------------------------------
+/* ------------------------------------------ ELEMENTS -------------------------------------------
+*/
+
+html{
+    height: 100%;
+}
+
+body{
+    margin:0;
+    padding:0;
+    background-image: linear-gradient( 109.5deg,  rgba(229,233,177,1) 11.2%, rgba(223,205,187,1) 100.2% );
+    font-family: sans-serif;
+}
+
+
+
+footer{
+    position: fixed;
+    top: 95%;
+    left: 47%;
+}
+
+
+
+
+
+
+/* -------------------------------------- NAV ----------------------------------------
 */
 nav img{
     width: 40px;
 }
 
 
-
-
-
-
-/* -------------------------------------- NAV END ---------------------------------------
+/* -------------------------------------- NAV END ----------------------------------------------
 */
 
-h1{
-    color : red;
+/* -------------------------------------- LOGIN PAGE ----------------------------------------
+*/
+.container-login .form-login{
+    position: absolute;
+
+    background-color:  rgb(252, 253, 229);
+    -webkit-box-shadow: -1px 0px 8px -1px rgba(121,138,124,0.35);
+    -moz-box-shadow: -1px 0px 8px -1px rgba(121,138,124,0.35);
+    box-shadow: -1px 0px 8px -1px rgba(121,138,124,0.35);
+    top: 25%;
+    left: 40%;
+    width: 20%;
+    border-radius: 4px;
+    
 }
 
 
+.container-login .form-login .label-login{
+    position: relative;
+    width: 87%;
+    margin-left:5%;
+    margin-top: 4%;
+}
 
-footer{
+.container-login .form-login .label-login-button{
+    position: relative;
+    width: 35%;
+    margin-left: 32%;
+    margin-top: 4%;
+}
+
+.container-login .form-login h1{
+    margin-left: 36%;
+    margin-top: 10%;
+    color: rgb(117, 121, 73);
+}
+.container-login .form-login p{
+    margin-top: 5%;
+    text-align: center;
+    
+    color: rgb(117, 121, 73);
+}
+
+.container-login .form-login .errorMessage .login-form-signup{
     text-align: center;
 }
+.container-login .form-login .errorMessage{
+    position: relative;
+    padding-bottom: 20px;
+    margin-top: 10px;
+    margin-right: 40px;
+    margin-bottom: 10px;
+    margin-left: 40px;
+}
+
+
+.formInput-login {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    margin-left: 2%;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+.formInput-login:valid ~ label,
+.formInput-login:focus ~ label{
+    font-size: 13px;
+    transform: translate(0,-14px);
+}
+
+
+.formInput-login-submit{
+    width: 80%;
+    padding: 10px 14px;
+    margin: 8px 10px;
+    color: white;
+    display: inline-block;
+    border: 1px solid #ccc;
+    color: rgb(117, 121, 73);
+    background-color: rgb(157, 163, 64);
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: background-color 1s;
+}
+
+.formInput-login-submit:hover{
+    background-color: rgba(121,138,124,0.35);
+}
+
+
+/* ---------------------------- LOGIN PAGE ENDS ----------------------
+*/
+
+
+
+
+
+
+/* ---------------------------- REGISTER PAGE -------------------------
+*/
+
+.container-register {
+    position: absolute;
+    top: 25%;
+    left: 40%;
+    width: 400px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.form-register{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: white;
+    -webkit-box-shadow: -1px 0px 8px -1px rgba(121,138,124,0.35);
+    -moz-box-shadow: -1px 0px 8px -1px rgba(121,138,124,0.35);
+    box-shadow: -1px 0px 8px -1px rgba(121,138,124,0.35);
+    border-radius:5px ;
+    box-sizing: border-box;
+}
+
+.container-register form .form-register div{
+    position: relative;
+}
+
+
+
+.container-register form .form-register div .label-register{
+    position: absolute;
+    top: 10px;
+    left: 0;
+    color: #999;
+    pointer-events: none;
+    transition: 1s all;
+}
+
+
+
+.formInput-register{
+
+    position: relative;
+    width: 100%;
+    padding: 10px 0;
+    margin-bottom: 13px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid #999;
+}
+
+.formInput-register:valid ~ label,
+.formInput-register:focus ~ label{
+    font-size: 13px;
+    transform: translate(0,-14px);
+}
+
+
+
+.formInput-register-submit{
+    display: flex;
+    background-color: rgb(157, 163, 64);
+    color: white;
+    position: relative;
+    width: 50%;
+    padding: 7px 8px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    border-bottom: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-sizing: border-box;
+
+}
+
+
+.container-register .form-register h2{
+    font-size: 100%;
+    color: rgb(157, 163, 64);
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+
+
+
+
+
+
+/*
+-------------------------------------------------------------------------
+*/ 
+
+
