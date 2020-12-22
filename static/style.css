@@ -254,19 +254,27 @@ nav img{
 
 .container-inside-editProfile{
    background-color: white;
+   border-radius: 10px;
+   box-sizing: border-box;
+   width: 20%;
 }
 
 
 
-.container-editProfile div {
+.container-editProfile .editProfile-item{
     position: relative;
     margin-bottom: 5px;
-    padding: 20px;
+    width: 80%;
+    padding: 10px;
+    padding-top: 15px;
+    padding-bottom: 0;
     border: none;
     border-bottom: 2px solid gray;
-    margin: 0 10%;
+    margin: 0 4%;
+    margin-left: 8%;
     border-radius: 5px;
     border-color: rgb(157, 163, 64);
+    box-sizing: border-box;
     
 }
 
@@ -274,11 +282,50 @@ nav img{
     position: relative;
     color: rgb(157, 163, 64);
     margin-bottom: 5px;
-    left: 30;
-    margin: 0 10%;
+    margin: 0 24%;
 }
 
 #profileHeader h1{
-    margin-left: 25%;
+    margin-left: 18%;
+    margin-top: 10%;
+    margin-bottom: 10px;
+}
+
+.container-editProfile h2{
+    font-size: 1.2rem;
+    display: inline-block;
+    color: rgb(92, 86, 86);
+}
+
+
+
+
+.btn-primary{
+    background-color:rgb(157, 163, 64);
+    border: 1px solid rgb(157, 163, 64);
+}
+
+.btn-primary:hover{
+    background-color: white;
+    color: black;
+}
+
+.container-inside-editProfile a{
+    position: relative;
+    margin-left: 30%;
+    margin: 0 10%;
+    margin-bottom: 5px;
+}
+
+.container-inside-editProfile label{
+    display: inline-block;
+    font-size: 1.2rem;
+    margin-top: 5px;
+    color: rgb(157, 163, 64);
+}
+
+.container-inside-editProfile #editProfile-button-border{
+    border: none;
+    margin: 10% 0 5% 20%;
 }
 
