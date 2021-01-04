@@ -1,0 +1,66 @@
+
+<nav>
+<div class="navbar">
+    <div class="container-nav">
+    <div class="navbar-left">
+        <a href="/">
+        <div class="navbar-brand">
+            <p>Logo</p>
+        </div>
+        </a>
+        <a href="/home">
+        <div class="navbar-item-left">
+            <p>Home</p>
+        </div>
+        </a>
+        <a href="/bets">
+        <div class="navbar-item-left">
+            <p>Bets</p>
+        </div>
+        </a>
+        {% if session["admin"] == True %}
+        <a href="/editBets">
+            <div class="navbar-item-left">
+                <p>Edit Bets</p>
+            </div>
+        </a>
+        {%endif%} 
+        <a href="/leaderboard">
+        <div class="navbar-item-left">
+            <p>Leaderboard</p>
+        </div>
+        </a>
+    </div>
+
+    <div class="navbar-right">
+        <a href="/faq">
+        <div class="navbar-item-right">
+            <p>FAQ/Support</p>
+        </a>
+        </div>
+        {% if session["logged"] == True %}
+        <a href="/profile/{{session['nickname']}}">
+        <div class="navbar-item-right">
+            <i class="fas fa-user"></i>
+            <p>Profile</p>
+        </div class="navbar-item-right">
+        <div></div>
+        <a href="/logout">
+            <i class="fas fa-sign-out-alt"></i>
+            <p>Logout</p>
+        </a>
+        </div>
+        {%else%}
+        <a href="/login">
+            <div class="navbar-item-right">
+                <p>Sign in!</p>
+            </div>
+        </a>
+        {%endif%} 
+    </div>
+</div>
+</div>
+</nav>
+    
+
+
