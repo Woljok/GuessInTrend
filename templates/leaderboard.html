@@ -1,0 +1,26 @@
+{%extends "layout.html"%}
+{% block title %}Leaderboard{% endblock %}
+{% block content%}
+
+<div class="container-leaderboard">
+    <div class="container-leaderboard-table">
+        <table id="ranks">
+            <tr>
+                <th>Rank</th>
+                <th>Nickname</th>
+                <th>Coin</th>
+            </tr>
+            {% for i in range(0,lenTable) %}
+            {% if merged[i][2] != "admin" %}
+            <tr>
+                <td>{{merged[i][0]}}</td>
+                <td>{{merged[i][2]}}</td>
+                <td>{{merged[i][3]}}</td>
+            </tr>
+            {%endif%} 
+            {%endfor%}
+        </table>
+    </div>
+</div>
+
+{%endblock%}
