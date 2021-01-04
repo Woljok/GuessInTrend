@@ -1,5 +1,5 @@
 {%extends "layout.html" %}
-{% block title %}Login{% endblock %}
+{% block title %}Profile{% endblock %}
 {% block content%}
 <div class="container-editProfile">
     <div class="container-inside-editProfile">
@@ -10,15 +10,9 @@
     <div class="editProfile-item"> <label for="mail">Mail: </label><h2> 	&nbsp	&nbsp{{profile[4]}}</h2></div>
     <div class="editProfile-item"> <label for="age">Age: </label><h2> 	&nbsp	&nbsp{{profile[5]}}</h2></div>
     <div class="editProfile-item"> <label for="coin">Coin: </label><h2> 	&nbsp	&nbsp{{profile[6]}}</h2></div>
-    <div id="editProfile-button-border"><a href="{{url_for('editProfile', userNickname = profile[1])}}" class="btn btn-primary">Edit your profile!</a></div>
+    <div id="editProfile-button-border"><a href="{{url_for('editProfile', userNickname = profile[1])}}">Edit your profile</a></div>
     </div>
-
-
-
-
-
-
-
 </div>
+
 
 {%endblock%}
