@@ -8,7 +8,6 @@ html{
 body{
     margin:0;
     padding:0;
-    background-image: linear-gradient( 109.5deg,  rgba(229,233,177,1) 11.2%, rgba(223,205,187,1) 100.2% );
     font-family: sans-serif;
 }
 
@@ -27,23 +26,166 @@ footer{
 
 /* -------------------------------------- NAV ----------------------------------------
 */
-nav img{
-    width: 40px;
+nav{
+   width: 100%;
+   height: 60px;
+   position: fixed;
+   -webkit-box-shadow: -1px 0px 8px -1px rgba(121,138,124,0.35);
+    -moz-box-shadow: -1px 0px 8px -1px rgba(121,138,124,0.35);
+    box-shadow: -1px 0px 8px -1px rgba(121,138,124,0.35);
+   border-radius: 15px;
+   height: -10px;
+   display: flex;
+   justify-content: center;
 }
+
+.navbar{
+    width: 80%;
+}
+
+.container-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.container-nav .navbar-left{
+    display: inline-block;
+    
+    width: auto;
+}
+
+
+
+.container-nav .navbar-right{
+    display: inline-block;
+    width: auto;
+}
+
+.navbar-left div, .navbar-right div{
+    display: inline-block;
+}
+
+.navbar-brand,.navbar-item-left{
+    margin-right: 30px;
+}
+.navbar-brand{
+    margin-left: 60px;
+}
+
+nav a{
+    width: 100%;
+    position: relative;
+    text-decoration: none;
+    color: #FF7F50;
+    padding: 20px 5px;
+    font-size: 20px;
+    transition: .5s;
+}
+
+nav a:hover{
+    background-color: #FF7F50;
+    color: white;
+
+}
+nav p{
+    display: inline-block;
+}
+
 
 
 /* -------------------------------------- NAV END ----------------------------------------------
 */
 
+
+/* -------------------------------------- INDEX PAGE ----------------------------------------
+*/
+
+.container-index{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-index div a{
+   text-decoration: none;   
+   padding: 20px;
+   border: 1px solid #FF7F50;
+   margin-top: 10px;
+   
+}
+
+
+
+
+
+
+
+
+
+
+/* --------------------------------- LEADERBOARD PAGE -----------------------------
+*/
+
+
+.container-leaderboard {
+    position: absolute;
+    width: 100%;
+    top: 10%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-leaderboard-table{
+    position: absolute;
+    width: 50%;
+    top: 10%;
+}
+
+#ranks {
+    border-collapse: collapse;
+    width: 90%;
+    border: 1px solid #ddd;
+    border-radius: 50px;
+}
+
+#ranks td, #ranks th{
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+#ranks th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color:rgb(255, 155, 118);
+    color: white;
+}
+
+#ranks tr:nth-child(even){background-color:rgb(255, 234, 226);}
+
+#ranks tr:hover {background-color: #f2f2f2;}
+
+
+
+
+
+
+
+
+
 /* -------------------------------------- LOGIN PAGE ----------------------------------------
 */
 .container-login .form-login{
     position: absolute;
-
-    background-color:  rgb(252, 253, 229);
     -webkit-box-shadow: -1px 0px 8px -1px rgba(121,138,124,0.35);
     -moz-box-shadow: -1px 0px 8px -1px rgba(121,138,124,0.35);
-    box-shadow: -1px 0px 8px -1px rgba(121,138,124,0.35);
+    box-shadow: -1px 0px 8px -1px rgba(121,138,124,0.35); 
     top: 25%;
     left: 40%;
     width: 20%;
@@ -69,13 +211,13 @@ nav img{
 .container-login .form-login h1{
     margin-left: 36%;
     margin-top: 10%;
-    color: rgb(117, 121, 73);
+    color: rgb(255, 169, 138);
 }
 .container-login .form-login p{
     margin-top: 5%;
     text-align: center;
     
-    color: rgb(117, 121, 73);
+    color: rgb(255, 169, 138);
 }
 
 .container-login .form-login .errorMessage .login-form-signup{
@@ -92,12 +234,13 @@ nav img{
 
 
 .formInput-login {
-    width: 100%;
+    width: 80%;
     padding: 12px 20px;
     margin: 8px 0;
-    margin-left: 2%;
+    margin-left: 4%;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: none;
+    border-bottom: 1px solid rgb(255, 169, 138);
     border-radius: 4px;
     box-sizing: border-box;
 }
@@ -111,21 +254,24 @@ nav img{
 
 
 .formInput-login-submit{
-    width: 80%;
+    width: 30%;
     padding: 10px 14px;
     margin: 8px 10px;
+    margin-top: 30px;
+    margin-right: 20px;
     color: white;
     display: inline-block;
     border: 1px solid #ccc;
-    color: rgb(117, 121, 73);
-    background-color: rgb(157, 163, 64);
+    color: white;
+    background-color: rgb(255, 169, 138);
     border-radius: 4px;
     box-sizing: border-box;
-    transition: background-color 1s;
+    transition: 1s;
+    cursor: pointer;
 }
 
 .formInput-login-submit:hover{
-    background-color: rgba(121,138,124,0.35);
+    background-color: rgb(255, 169, 138);
 }
 
 
@@ -191,7 +337,7 @@ nav img{
     box-sizing: border-box;
     outline: none;
     border: none;
-    border-bottom: 2px solid #999;
+    border-bottom: 2px solid #FF7F50;
 }
 
 .formInput-register:valid ~ label,
@@ -204,13 +350,13 @@ nav img{
 
 .formInput-register-submit{
     display: flex;
-    background-color: rgb(157, 163, 64);
+    background-color: #FF7F50;
     color: white;
     position: relative;
     width: 50%;
     padding: 7px 8px;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin-bottom: 50px;
+    margin-top: 25px;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -223,10 +369,11 @@ nav img{
 
 
 .container-register .form-register h2{
+    text-transform: uppercase;
     font-size: 100%;
-    color: rgb(157, 163, 64);
+    color: #FF7F50;
     margin-bottom: 20px;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 
@@ -249,11 +396,16 @@ nav img{
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100vh;
+    top: 10%;
+    height: 80%;
 }
 
 .container-inside-editProfile{
    background-color: white;
+   border-bottom: 1px solid rgb(255,148,109);
+   border-top: 1px solid rgb(255,148,109);
+   border-left: 1px dashed rgb(255,148,109);
+   border-right: 1px dashed rgb(255,148,109);
    border-radius: 10px;
    box-sizing: border-box;
    width: 20%;
@@ -269,18 +421,18 @@ nav img{
     padding-top: 15px;
     padding-bottom: 0;
     border: none;
-    border-bottom: 2px solid gray;
+    border-bottom: 2px solid rgb(255, 169, 138);
     margin: 0 4%;
     margin-left: 8%;
     border-radius: 5px;
-    border-color: rgb(157, 163, 64);
+    border-color: #ff946d;
     box-sizing: border-box;
     
 }
 
 #profileHeader{
     position: relative;
-    color: rgb(157, 163, 64);
+    color: #ff946d;
     margin-bottom: 5px;
     margin: 0 24%;
 }
@@ -294,38 +446,125 @@ nav img{
 .container-editProfile h2{
     font-size: 1.2rem;
     display: inline-block;
-    color: rgb(92, 86, 86);
+    color: #b98a78;
 }
 
-
-
-
-.btn-primary{
-    background-color:rgb(157, 163, 64);
-    border: 1px solid rgb(157, 163, 64);
+.container-editProfile a{
+    background-color: #ff946d;
+    border: 1px solid rgb(255,148,109);
+    color: white;
+    padding: 5px 10px 5px 10px;
+    margin-left: 50px;
+    border: 1px solid white;
+    transition: 1s;
 }
 
-.btn-primary:hover{
+.container-editProfile a:hover{
     background-color: white;
-    color: black;
+    border-color: rgb(255,148,109);
+    color: rgb(255,148,109);
 }
+
+
+
+
+
+
 
 .container-inside-editProfile a{
     position: relative;
     margin-left: 30%;
     margin: 0 10%;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color:white;
+    padding: 10px;
+    background-color: rgb(255,148,109);
+    transition: .5s;
 }
 
 .container-inside-editProfile label{
     display: inline-block;
     font-size: 1.2rem;
     margin-top: 5px;
-    color: rgb(157, 163, 64);
+    color: rgb(255,148,109);
 }
 
 .container-inside-editProfile #editProfile-button-border{
-    border: none;
-    margin: 10% 0 5% 20%;
+    margin: 13% 0 10% 17%;
 }
 
+
+
+/* *******************  EDIT PROFILE PAGE ****************
+*/ 
+
+.container-edit{
+    position: absolute;
+    width: 100%;
+    height: 80%;
+    top: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-edit .form-area{
+    position: absolute;
+    background-color: white;
+    border-radius: 10px;
+    border-bottom: 1px solid rgb(255,148,109);
+   border-top: 1px solid rgb(255,148,109);
+   border-left: 1px dashed rgb(255,148,109);
+   border-right: 1px dashed rgb(255,148,109);
+    padding: 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-edit .form-area .edit-items{
+    margin-bottom: 5%;
+}
+
+.container-edit .form-area button{
+    margin-top: 10%;
+    margin-bottom: 5%;
+    margin-left: 35%;
+    padding: 7px 20px 7px 20px;
+    background-color:  rgb(255,148,109);
+    border: 1px solid rgb(255,148,109);
+    color: white;
+    transition: 1s;
+    cursor: pointer;
+}
+
+.container-edit .form-area button:hover{
+    background-color: white;
+    color: rgb(255,148,109);
+    border:1px solid rgb(255,148,109);
+}
+
+.container-edit input{
+    border: none;
+    border-bottom: 1px solid rgb(255,148,109);
+}
+
+.container-edit input:focus{
+    border: none;
+    outline: none;
+    border-bottom: 1px solid rgb(255,148,109);
+}
+
+
+.container-edit h2{
+    text-transform: uppercase;
+    margin-bottom: 13%;
+    position: relative;
+    left: 23%;
+    color: rgb(255,148,109);
+}
+.container-edit label{
+    color: rgb(255,148,109);
+}
