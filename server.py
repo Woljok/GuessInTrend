@@ -1,6 +1,7 @@
 from flask import Flask, abort, current_app, render_template, request, session, url_for, redirect, flash
 from flask_mysqldb import MySQL
 from MySQLdb import IntegrityError
+import bcrypt
 from database import Database
 
 
@@ -13,6 +14,7 @@ mysql = MySQL(app)
 @app.route("/")
 def index():
     session["logged"] = False
+    session["admin"] = False
     return render_template("index.html")
 
 @app.route("/home")
@@ -52,22 +54,24 @@ def editProfile(userNickname):
         db.cursor.execute(query)
         profileHolder = db.cursor.fetchone()
         nickname = request.form.get("nickname")
-        password = request.form.get("password")
-        password2 = request.form.get("passwordNew")
-        password3 = request.form.get("passwordNew2")
+        password = request.form.get("password").encode('utf-8')
+        password2 = request.form.get("passwordNew").encode('utf-8')
+        password3 = request.form.get("passwordNew2").encode('utf-8')
         fullname = request.form.get("fullname")
         mail = request.form.get("mail")
         age = request.form.get("age")
-        if(profileHolder[3] != password):
+        if(bcrypt.hashpw(password,profileHolder[3].encode('utf-8')) != profileHolder[3].encode('utf-8')):
             return render_template("edit_profile.html", profile= profileHolder, message = 'ŞİFRE YANLIŞ, TEKRAR DENEYİNİZ.')
         if password2 != '':
             if password2 != password3:
                 return render_template("edit_profile.html", profile= profileHolder, message = 'ŞİFRELER EŞLEŞMİYOR.')
+               
         if age != '':
             if fullname != '':
                 if password2 != '':
+                    hashedPass = bcrypt.hashpw(password2,bcrypt.gensalt()) 
                     query = "UPDATE mydb.user SET nickname = %s, fullname = %s, password = %s, mail = %s, age = %s WHERE idUser = %s"
-                    vals = (nickname, fullname, password2, mail, age,str(session["idUser"]))
+                    vals = (nickname, fullname, hashedPass, mail, age,str(session["idUser"]))
                     db.cursor.execute(query, vals)
                     db.con.commit()
                 else:
@@ -77,8 +81,9 @@ def editProfile(userNickname):
                     db.con.commit()
             else:
                 if password2 != '':
+                    hashedPass = bcrypt.hashpw(password2,bcrypt.gensalt()) 
                     query = "UPDATE mydb.user SET nickname = %s, password = %s, mail = %s, age = %s WHERE idUser = %s"
-                    vals = (nickname, password2, mail, age,str(session["idUser"]))
+                    vals = (nickname, hashedPass, mail, age,str(session["idUser"]))
                     db.cursor.execute(query, vals)
                     db.con.commit()
                 else:
@@ -89,31 +94,55 @@ def editProfile(userNickname):
         else:
             if fullname != '':
                 if password2 == '':
+                    
                     query = "UPDATE mydb.user SET nickname = %s, fullname = %s, mail = %s WHERE idUser = %s"
                     val = (nickname, fullname, mail,str(session["idUser"]))
                     db.cursor.execute(query, val)
                     db.con.commit()
                 else:
+                    hashedPass = bcrypt.hashpw(password2,bcrypt.gensalt()) 
                     query = "UPDATE mydb.user SET nickname = %s, fullname = %s, password = %s, mail = %s WHERE idUser = %s"
-                    val = (nickname, fullname, password2, mail,str(session["idUser"]))
+                    val = (nickname, fullname, hashedPass, mail,str(session["idUser"]))
                     db.cursor.execute(query, val)
                     db.con.commit()
             else:
                 if password2 == '':
+                    
                     query = "UPDATE mydb.user SET nickname = %s,mail = %s WHERE idUser = %s"
                     val = (nickname, mail,str(session["idUser"]))
                     db.cursor.execute(query, val)
                     db.con.commit()
                 else:
+                    hashedPass = bcrypt.hashpw(password2,bcrypt.gensalt()) 
                     query = "UPDATE mydb.user SET nickname = %s,password = %s, mail = %s WHERE idUser = %s"
-                    val = (nickname,password2, mail,str(session["idUser"]))
+                    val = (nickname,hashedPass, mail,str(session["idUser"]))
                     db.cursor.execute(query, val)
                     db.con.commit()
         return redirect(url_for("profile", userNickname = nickname))
 
+@app.route("/leaderboard", methods=["GET"])
+def leaderboard():
+    query = "SELECT * FROM mydb.user ORDER BY coin DESC, fullname"
+    db.cursor.execute(query)
+    users = db.cursor.fetchall()
+    counter = 0
+    for user in users:
+        userHolder = users[counter]
+        userId = userHolder[0] 
+        counter += 1 
+        query = "UPDATE mydb.rank SET idRank = ("+ str(counter) +") WHERE userId = (" + str(userId) +")"
+        db.cursor.execute(query)
+        db.con.commit()
+    query = "SELECT * FROM mydb.rank ORDER BY idRank"
+    db.cursor.execute(query)
+    leaderboard = db.cursor.fetchall()
+    lenTable = len(leaderboard)
+    query = "SELECT  rank.idRank, rank.userId, user.nickname, user.coin FROM mydb.rank LEFT JOIN mydb.user ON rank.userId = user.idUser ORDER BY rank.idRank"
+    db.cursor.execute(query)
+    mergedTables = db.cursor.fetchall()
+    lenTable = len(mergedTables)
+    return render_template("leaderboard.html", merged = mergedTables, lenTable = lenTable)
         
-
-
 @app.route("/login", methods=["GET", "POST"])
 def login():
     message = ''
@@ -121,18 +150,20 @@ def login():
         return render_template("login.html")
     else:
         nickname = request.form.get("nickname")
-        password = request.form.get("password")
+        password = request.form.get("password").encode('utf-8')
         if nickname is not None:
             print(nickname)
             query = "SELECT * FROM mydb.user WHERE nickname = \"" + nickname + "\""
             db.cursor.execute(query)
             userChecker = db.cursor.fetchone()
             if userChecker:
-                if userChecker[3] == password:
+                if bcrypt.hashpw(password,userChecker[3].encode('utf-8')) == userChecker[3].encode('utf-8'):
                     session["logged"] = True
                     session["idUser"] = userChecker[0]
                     session["nickname"] = userChecker[1]
-                    session.permanent = True 
+                    session.permanent = True
+                    if(nickname == "admin"):
+                        session["admin"] = True 
                     return redirect(url_for("home_page"))
                 else:    
                     return render_template("login.html",message = 1)
@@ -149,13 +180,14 @@ def register():
         return render_template("register.html")
     else:
         nickname = request.form.get("nickname")
-        password = request.form.get("password")
-        password2 = request.form.get("password2")
+        password = request.form.get("password").encode('utf-8')
+        password2 = request.form.get("password2").encode('utf-8')
         fullname = request.form.get("fullname")
         mail = request.form.get("mail")
         age = request.form.get("age")
         if password2 != password:
             return render_template("register.html", message='ŞİFRELER EŞLEŞMİYOR. TEKRAR DENEYİNİZ..')
+        hashedPass = bcrypt.hashpw(password,bcrypt.gensalt())
         query = "SELECT * FROM mydb.user WHERE mail = \"" + mail + "\""
         db.cursor.execute(query)
         checkMail = db.cursor.fetchone()
@@ -169,25 +201,32 @@ def register():
         if age != '':
             if fullname != '':
                 query = "INSERT INTO mydb.user (nickname, fullname, password, mail, age) VALUES (%s,%s,%s,%s,%s)"
-                vals = (nickname, fullname, password, mail, age)
+                vals = (nickname, fullname, hashedPass, mail, age)
                 db.cursor.execute(query, vals)
                 db.con.commit()
             else:
                 query = "INSERT INTO mydb.user (nickname, password, mail, age) VALUES (%s,%s,%s,%s)"
-                vals = (nickname, password, mail , age)
+                vals = (nickname, hashedPass, mail , age)
                 db.cursor.execute(query, vals)
                 db.con.commit()
         else:
             if fullname != '':
                 query = "INSERT INTO mydb.user (nickname, fullname, password, mail) VALUES (%s,%s,%s,%s)"
-                vals = (nickname, fullname, password, mail)
+                vals = (nickname, fullname, hashedPass, mail)
                 db.cursor.execute(query, vals)
                 db.con.commit()
             else:
                 query = "INSERT INTO mydb.user (nickname, password, mail) VALUES (%s,%s,%s)"
-                vals = (nickname, password, mail)
+                vals = (nickname, hashedPass, mail)
                 db.cursor.execute(query, vals)
                 db.con.commit()
+        query = "SELECT idUser FROM mydb.user WHERE nickname = \"" + nickname+ "\""
+        db.cursor.execute(query)
+        checkUser = db.cursor.fetchone()
+        idHolder = checkUser[0]
+        query = "INSERT INTO mydb.rank (userId) VALUES ("+ str(idHolder) +")"
+        db.cursor.execute(query)
+        db.con.commit()
         return render_template("register.html", message = "BAŞARIYLA KAYIT OLDUNUZ")
 
 
@@ -196,7 +235,8 @@ def logout():
     session["logged"] = False
     session["nickname"] = False
     session["IdUser"] = False
-    return redirect(url_for("home"))
+    session["admin"] = False
+    return redirect(url_for("index"))
 
 @app.route("/error")
 def error():
