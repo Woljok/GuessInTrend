@@ -19,12 +19,10 @@ def index():
 
 @app.route("/home")
 def home_page():
-    boolUser = False
     if session["logged"] == True:
-        boolUser = True
-        return render_template("home.html", boolUser= boolUser, nickname = session["nickname"])
+        return render_template("home.html")
     else:
-        return render_template("home.html", boolUser= boolUser)
+        return render_template("index.html")
    
 
 
@@ -120,6 +118,11 @@ def editProfile(userNickname):
                     db.con.commit()
         return redirect(url_for("profile", userNickname = nickname))
 
+
+
+
+
+
 @app.route("/leaderboard", methods=["GET"])
 def leaderboard():
     query = "SELECT * FROM mydb.user ORDER BY coin DESC, fullname"
@@ -142,7 +145,28 @@ def leaderboard():
     mergedTables = db.cursor.fetchall()
     lenTable = len(mergedTables)
     return render_template("leaderboard.html", merged = mergedTables, lenTable = lenTable)
-        
+
+@app.route("/editBets", methods=["GET"])
+def editBet():
+    if session["admin"] == False:
+        return render_template("error.html")
+    if request.method == "GET":
+        return render_template("edit_bets.html")
+    else:
+        return render_template("edit_bets.html")
+    
+
+@app.route("/editBets/add", methods=["GET", "POST"])
+def addbet():
+    if session["admin"] == False:
+        return render_template("error.html")
+    if request.method == "GET":
+        return render_template("add_bet.html")
+    else:
+        return render_template("edit_bets.html")
+
+
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     message = ''
