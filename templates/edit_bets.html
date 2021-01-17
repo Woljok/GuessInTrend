@@ -22,15 +22,17 @@
     <div class="container-showBets">
         {% for i in range(0,lenBets) %}
         <div class="bet-container">
-        <div class="endTime">{{bets[i][5]}}</div>
-        {% if bets[i][5].day == date.day %}
+        <div class="endTime"><h3>End Time: {{bets[i][5]}}</h3></div>
+        {% if date < bets[i][5] and bets[i][5].day == date.day %}
         {% if bets[i][5].hour - date.hour < 1%}
         <div class="hourLeft"><h3>{{bets[i][5].minute - date.minute}} minutes left</h3></div>
         {%endif%}
         {%endif%}
-        <div class="bet"><img src="../static/img/{{bets[i][3]}}" alt="betImage"></div>
-        <div><h3>{{bets[i][1]}}</h3></div>
-        <div><h3>{{bets[i][4]}}</h3></div>
+        <div class="bet"><img src="../static/img/{{bets[i][3]}}" alt="betImage">
+        <label>Bet: {{bets[i][1]}}</label>
+        <label>Reward:{{bets[i][4]}} Coins</label>
+        <a href="/editPanel/edit/{{bets[i][0]}}">Edit</a>
+        </div>
         </div>
         {%endfor%}
 
