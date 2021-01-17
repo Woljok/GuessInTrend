@@ -7,8 +7,8 @@ from database import Database
 import random
 import os
 from werkzeug.utils import secure_filename
-
-UPLOAD_FOLDER = r'./static/img'
+path = os.getcwd()
+UPLOAD_FOLDER = os.path.join(path, 'static\\img')
 app = Flask(__name__)
 app.secret_key = 'woljokerino'
 db = Database("127.0.0.1",3306, "root", "furkan1907", "mydb")
@@ -123,7 +123,12 @@ def editProfile(userNickname):
         return redirect(url_for("profile", userNickname = nickname))
 
 
-
+@app.route("/bets")
+def bets():
+    query = "SELECT * FROM mydb.bet ORDER BY time"
+    db.cursor.execute(query)
+    bets = db.cursor.fetchall()
+    return render_template("bets.html", bets = bets)
 
 
 
@@ -189,12 +194,7 @@ def addbet():
                 query = "INSERT INTO mydb.bet_has_category (bet_id, category_id) VALUES ("+ str(betChecker[0]) +", "+ str(catId) +")"
                 db.cursor.execute(query)
                 db.con.commit()
-        query = "SELECT * FROM mydb.bet"
-        db.cursor.execute(query)
-        bets = db.cursor.fetchall()
-        lenBets = len(bets)    
-        currentDate = datetime.today()
-        return render_template("edit_bets.html",bets=bets, lenBets = lenBets,date = currentDate)
+        return redirect(url_for("edit_bets"))
 
         
 @app.route("/editPanel/edit", methods=["GET"])
@@ -215,7 +215,49 @@ def edit_bet(betId):
     if session["admin"] == False:
         return render_template("error.html")
     if request.method == "GET":
-        return redirect(url_for("edit_bet", betId = betId))
+        query = "SELECT *FROM mydb.bet WHERE idBets = \"" + betId + "\""
+        db.cursor.execute(query)
+        bet = db.cursor.fetchone()
+        return render_template("edit_bet.html", bet=bet)
+    else:
+        query = "SELECT *FROM mydb.bet WHERE idBets = \"" + betId + "\""
+        db.cursor.execute(query)
+        bet = db.cursor.fetchone()
+        question = request.form.get("question")
+        reward = request.form.get("reward")
+        file = request.files['file']
+        answer = request.form.get("radio")
+        if answer == "dont":
+            if file:
+                filename1 = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename1))
+                query = "UPDATE mydb.bet SET question = %s,imageUrl = %s, reward = %s WHERE idBets = %s"
+                val = (question,filename1,reward,bet[0])
+                db.cursor.execute(query, val)
+                db.con.commit()
+                print("eldi")
+                print(file)
+            else:
+                query = "UPDATE mydb.bet SET question = %s, reward = %s WHERE idBets = %s"
+                val = (question,reward,bet[0])
+                db.cursor.execute(query, val)
+                db.con.commit()
+        else:
+            query = "SELECT user_id FROM mydb.user_play_bet WHERE bet_id = \"" + bet[0] + "\""
+            db.cursor.execute(query)
+            users = db.cursor.fetchone()
+            if users:
+                for i in range(0, len(users)):
+                    if users[i][2] == answer:
+                        query = "SELECT * FROM mydb.user WHERE idUser = \"" + users[i] +"\""
+                        db.cursor.execute(query)
+                        user = db.cursor.fetchone()
+                        user[6] = user[6] + reward
+                        query = "UPDATE mydb.user SET coin = %s WHERE idUser = %s"
+                        val = (user[6], user[0])
+                        db.cursor.execute(query,val)
+                        db.con.commit() 
+        return render_template("edit_panel.html")
 
 
 
