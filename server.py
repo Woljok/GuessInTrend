@@ -2,14 +2,18 @@ from flask import Flask, abort, current_app, render_template, request, session, 
 from flask_mysqldb import MySQL
 from MySQLdb import IntegrityError
 import bcrypt
+from datetime import datetime
 from database import Database
+import random
+import os
+from werkzeug.utils import secure_filename
 
-
+UPLOAD_FOLDER = r'./static/img'
 app = Flask(__name__)
 app.secret_key = 'woljokerino'
 db = Database("127.0.0.1",3306, "root", "furkan1907", "mydb")
 mysql = MySQL(app)
-
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/")
 def index():
@@ -146,24 +150,72 @@ def leaderboard():
     lenTable = len(mergedTables)
     return render_template("leaderboard.html", merged = mergedTables, lenTable = lenTable)
 
-@app.route("/editBets", methods=["GET"])
-def editBet():
+@app.route("/editPanel", methods=["GET"])
+def editBets():
     if session["admin"] == False:
         return render_template("error.html")
     if request.method == "GET":
-        return render_template("edit_bets.html")
-    else:
-        return render_template("edit_bets.html")
+        return render_template("edit_panel.html")
     
 
-@app.route("/editBets/add", methods=["GET", "POST"])
+@app.route("/editPanel/add", methods=["GET", "POST"])
 def addbet():
     if session["admin"] == False:
         return render_template("error.html")
     if request.method == "GET":
         return render_template("add_bet.html")
     else:
-        return render_template("edit_bets.html")
+        question = request.form.get("question")
+        time = request.form.get("time")
+        file = request.files['file']
+        filename1 = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename1))
+        reward = request.form.get("reward")
+        categories = request.form.getlist("check")
+        query = "INSERT INTO mydb.bet (question, imageUrl, reward, time) VALUES (%s,%s,%s,%s)"
+        db.cursor = db.con.cursor(buffered=True)
+        vals = (question, filename1, reward, time)
+        db.cursor.execute(query, vals)
+        db.con.commit()
+        query = "SELECT * FROM mydb.bet WHERE question = \"" + question +"\""
+        db.cursor.execute(query)
+        betChecker = db.cursor.fetchone()
+        for i in categories:
+            query = "SELECT * FROM mydb.category WHERE nameCategory = \"" + i + "\""
+            db.cursor.execute(query)
+            catChecker = db.cursor.fetchone()
+            if catChecker is not None:
+                catId = catChecker[0]
+                query = "INSERT INTO mydb.bet_has_category (bet_id, category_id) VALUES ("+ str(betChecker[0]) +", "+ str(catId) +")"
+                db.cursor.execute(query)
+                db.con.commit()
+        query = "SELECT * FROM mydb.bet"
+        db.cursor.execute(query)
+        bets = db.cursor.fetchall()
+        lenBets = len(bets)    
+        currentDate = datetime.today()
+        return render_template("edit_bets.html",bets=bets, lenBets = lenBets,date = currentDate)
+
+        
+@app.route("/editPanel/edit", methods=["GET"])
+def edit_bets():
+    if session["admin"] == False:
+        return render_template("error.html")
+    if request.method == "GET":
+        query = "SELECT * FROM mydb.bet"
+        db.cursor.execute(query)
+        bets = db.cursor.fetchall()
+        lenBets = len(bets)
+        print(lenBets)
+        currentDate = datetime.today()
+        return render_template("edit_bets.html", bets=bets, lenBets = lenBets, date = currentDate)
+
+@app.route("/editPanel/edit/<betId>", methods=["GET", "POST"])
+def edit_bet(betId):
+    if session["admin"] == False:
+        return render_template("error.html")
+    if request.method == "GET":
+        return redirect(url_for("edit_bet", betId = betId))
 
 
 
