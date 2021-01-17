@@ -1,0 +1,42 @@
+{%extends "layout.html"%}
+{%block title%} - Edit Bet {%endblock%}
+{%block content%}  
+<div class="container-addBet">
+    <div class="addBet-left">
+        <div class="left-items">
+            <a href="/editPanel/edit">
+                <h3>Edit bet</h3>
+            </a>
+        </div> 
+        <div class="left-items">
+            <a href="/editPanel/add">
+                <h3>Add a bet</h3>
+            </a>
+        </div> 
+        <div class="left-items">
+            <a href="/editPanel/delete">
+                <h3>Delete a bet</h3>
+            </a>
+        </div> 
+    </div>
+    <div class="container-showBets">
+        {% for i in range(0,lenBets) %}
+        <div class="bet-container">
+        <div class="endTime">{{bets[i][5]}}</div>
+        {% if bets[i][5].day == date.day %}
+        {% if bets[i][5].hour - date.hour < 1%}
+        <div class="hourLeft"><h3>{{bets[i][5].minute - date.minute}} minutes left</h3></div>
+        {%endif%}
+        {%endif%}
+        <div class="bet"><img src="../static/img/{{bets[i][3]}}" alt="betImage"></div>
+        <div><h3>{{bets[i][1]}}</h3></div>
+        <div><h3>{{bets[i][4]}}</h3></div>
+        </div>
+        {%endfor%}
+
+    </div>
+
+</div>
+
+
+{%endblock%}
