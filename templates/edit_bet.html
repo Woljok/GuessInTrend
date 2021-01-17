@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block title%} Edit {% endblock %}
+{% block content%}
+
+
+<div class="container-editTheBet">
+    <div class="form-container-editTheBet">
+        <form id="editTheBet" action="" method="POST" enctype="multipart/form-data">
+            <div class="form-editTheBet">
+            <label>Current image: 
+                <img src="../../static/img/{{bet[3]}}">
+            </label>
+            <label>Change image:
+                <input type="file" name="file" id="imgFile" accept="image/*" onchange="showPreview(event);">
+            </label>
+            <label>Question:
+                <textarea rows="4" cols="50" name="question" form="editTheBet">{{bet[1]}}</textarea>
+            </label>
+            <label>Current reward: {{bet[4]}}</label>
+            <label>Change reward: <input type="number" name="reward" value="{{bet[4]}}">
+            </label>
+            <label>Set Answer:</label>
+            <label class="checkbox">Don't set</label><input type="radio" name="radio" value="dont">
+            <label class="checkbox">No </label><input type="radio" name="radio" value="no">
+            <label class="checkbox">Yes </label><input type="radio" name="radio" value="yes">
+            <button class="saveBet">Save</button>
+        </div>
+        </form>
+    </div>
+    <div class="right-editBet">
+        <div class="imagePreview">
+            <p id="imagePreview-text">Image</p> <img src="" alt="preview" class="imagePreview_img" id="imagePreview_img"></h3>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+{%endblock%}
