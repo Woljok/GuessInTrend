@@ -1,0 +1,53 @@
+{%extends "layout.html"%}
+{%block title%} - Edit Bet {%endblock%}
+{%block content%}  
+
+<div class="container-addBet">
+    <div class="addBet-left">
+        <div class="left-items">
+            <a href="/editPanel/edit">
+                <h3>Edit bet</h3>
+            </a>
+        </div> 
+        <div class="left-items">
+            <a href="/editPanel/add">
+                <h3>Add a bet</h3>
+            </a>
+        </div> 
+        <div class="left-items">
+            <a href="/editPanel/delete">
+                <h3>Delete a bet</h3>
+            </a>
+        </div> 
+    </div>
+    <div class="addBet-right">
+        
+        <div class="addBet-right-right">
+            <form id="addBet-form" action="" method="POST" enctype="multipart/form-data">
+                <div class="addBet-form-container">
+                    <label>Image <input type="file" id="imgFile" accept="image/*" onchange="showPreview(event);" name="file"></label>
+                    <label>Question <input id="textPre" type="text-area"  name="question"></label>
+                    <label>Category </label>
+                    <label class="checkbox">Daily </label><input type="checkbox" name="check" value="Daily">
+                    <label class="checkbox">Weekly </label><input type="checkbox" name="check" value="Weekly">
+                    <label class="checkbox"> Fashion </label><input type="checkbox" name="check" value="Fashion">
+                    <label class="checkbox">Sport </label><input type="checkbox" name="check" value="Sport">
+                    <label class="checkbox">TV </label><input type="checkbox" name="check" value="TV">
+                    <label class="checkbox">Trend </label><input type="checkbox" name="check" value="Trend">
+                    <label class="checkbox">Reward <input type="number" name="reward"></label>
+                    <label class="checkbox">Time  
+                        <input type="datetime-local" name="time">
+                    </label>
+                    <button type="submit" name="save">Add the bet</button>
+                </div>
+            </form>
+        </div>
+        <div class="addBet-right-left">
+            <div class="imagePreview">
+                <p id="imagePreview-text">Image</p> <img src="" alt="preview" class="imagePreview_img" id="imagePreview_img"></h3>
+
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
