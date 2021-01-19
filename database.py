@@ -9,10 +9,10 @@ class Database:
 
         self.con = mysql.connector.connect(host=host, port=port ,user=user, passwd=passwd, database=db, auth_plugin='mysql_native_password')
         self.cursor = self.con.cursor()
-
+        
     def toggle(self):
-
-        if (self.check == 0):
-            self.check = 1
+        self1 = self
+        if (self1.check == 0):
+            self1.check = 1
         else:
-            self.check = 0
+            self1.check = 0
