@@ -1,0 +1,68 @@
+{%extends "layout.html"%}
+{%block title%} - Bet{%endblock%}
+{%block content%}  
+
+<div class="container-bets">
+    <div class="container-bets-left">
+        <ul class="categories-bets">
+            <label><a href="/bets">All Bets</a></label>
+            {%for i in range(0,lenCat)%}
+            <label><a href="/bets/{{cats[i][1]}}">{{cats[i][1]}}</a></label>
+            {%endfor%}
+        </ul>
+    </div>
+    <div class="container-betsShow-right">
+        <div class="container-betShow-right-bet">
+            <div class="answerPage-endTime"> Ending time: {{bet[5]}}</div>
+            <div class="answerPage-reward"> Reward: {{bet[4]}} Coins</div>
+            <img src="../../static/img/{{bet[3]}}">
+            <div class="answerPage-question">{{bet[1]}}</div>
+            <form id="user-answer" action="" method="POST">
+                <label class="answerPage-answer">Yes! <input class="radioButton" type="radio" name="answer" value="yes"></label>
+                <label class="answerPage-answer">No! <input class="radioButton" type="radio" name="answer" value="no"></label>
+                {%if isPlayed%}
+                <h1 class="answerPagePlayed">Answered!</h1>
+                {%else%}
+                <button class="answerPage-button" value="answerBet" name="showBet">SAVE YOUR ANSWER!</button>
+                {%endif%}
+            </form>
+        </div>
+        <div class="container-betShow-comment">
+            <h3 id="commentsh3">Comments</h3>
+            <div class="comments">
+                <form id="delete" action="" method="POST">
+                {%for m in range(lenCom)%}
+                <div class="commentUser">
+                    <label class="timeComment">{{comments[m][4]}}</label>
+                    <label class="userComment">{{comments[m][5]}}</label>
+                    <textarea rows="5" cols="50" class="textComment">{{comments[m][3]}}</textarea>
+                    {%if session['admin'] == True%}
+                    <label class="deleteCom">Delete<input type="checkbox" name="delete" value="{{comments[m][0]}}" form="delete"  ></label>
+                    {%endif%}
+                </div>
+                {%endfor%}
+            </div>
+            <div class="form-commentarea">
+                {%if session['admin'] == True%}
+                    <button class="deleteComment-button" value="deleteComment" name="showBet" form="delete">Delete!</button>
+                </form>
+                {%endif%}
+                <form id="commentarea" action="" method="POST">
+                    <textarea rows="5" cols="50" name="commentArea" form="commentarea" placeholder="Add comment!"></textarea>
+                    <button class="addComment-button" value="addComment" name="showBet">ADD!</button>
+                </form>
+                
+            </form>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+{%endblock%}

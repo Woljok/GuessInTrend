@@ -1,8 +1,37 @@
 {%extends "layout.html"%}
-{%block title%} - Edit Bet {%endblock%}
+{%block title%} - Bets {%endblock%}
 {%block content%} 
 
-
+<div class="container-bets">
+    <div class="container-bets-left">
+        <ul class="categories-bets">
+            <label><a href="/bets">All Bets</a></label>
+            {%for i in range(0,lenCat)%}
+            <label><a href="/bets/{{cats[i][1]}}">{{cats[i][1]}}</a></label>
+            {%endfor%}
+        </ul>
+    </div>
+    <div class="container-bets-right">
+        {%for k in range(0,lenBet)%}
+        {% if date > bets[k][5]%}
+        <div class="bet-card-bets-over">
+            <div class="endBet">Bet ended.</div>
+            <div class="questionBet">Bet: {{bets[k][1]}}</div>
+            <div class="rewardBet">Reward: {{bets[k][4]}} Coins</div>
+        </div>
+        {%else%}
+        <a href="/bets/bet/{{bets[k][0]}}">
+        <div class="bet-card-bets">
+            
+           <div class="endBet">Bet ending time: {{bets[k][5]}}</div>
+           <div class="questionBet">Bet: {{bets[k][1]}}</div>
+           <div class="rewardBet">Reward: {{bets[k][4]}} Coins</div>
+        </div>
+        </a>
+        {%endif%}
+        {%endfor%}
+    </div>
+</div>
 
 
 

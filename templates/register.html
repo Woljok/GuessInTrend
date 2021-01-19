@@ -2,7 +2,7 @@
 {% block title %}Register{% endblock %}
 {% block content%}
 <div class="container-register">
-<form id="register_form" action="" method="POST">
+<form id="register_form" action="" autocomplete="off" method="POST">
     <div class="form-register">
         <h2>Register for unlimited fun!</h2>
         <div>
@@ -34,13 +34,15 @@
         <label for="age" class="label-register" title="Age">Age, not required</label>
         </div>
     <button class="formInput-register-submit"  type="submit">Register!</button>
-    </div>
-</form>
-<div class="errorMessage"></div>
-<h1>{{message}}</h1>
-{% if message == 'BAŞARIYLA KAYIT OLDUNUZ' %}
-<h1><a href="{{ url_for('login') }}"> Giriş yap</a></h1>
-{%endif%}
+    <div class="errorMessage">
+    <h3>{{message}}</h3>
+    {% if message == 'BAŞARIYLA KAYIT OLDUNUZ' %}
+    <h3><a href="{{ url_for('login') }}"> Giriş yap</a></h3>
+    {%endif%}
+</div>  
+    </div>    
 </div>
+</form>
+
 </div>
 {%endblock%}

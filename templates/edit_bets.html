@@ -1,5 +1,5 @@
 {%extends "layout.html"%}
-{%block title%} - Edit Bet {%endblock%}
+{%block title%} - Edit Bets {%endblock%}
 {%block content%}  
 <div class="container-addBet">
     <div class="addBet-left">
@@ -22,15 +22,18 @@
     <div class="container-showBets">
         {% for i in range(0,lenBets) %}
         <div class="bet-container">
+            {% if bets[i][2]==0 or bets[i][2]==1 %}
+           <div class="answered">You already set answer.</div>
+        {%endif%}
+        {% if date > bets[i][5] %}
+        <h1>Bet ended.</h1>
+        {%else%}
         <div class="endTime"><h3>End Time: {{bets[i][5]}}</h3></div>
-        {% if date < bets[i][5] and bets[i][5].day == date.day %}
-        {% if bets[i][5].hour - date.hour < 1%}
-        <div class="hourLeft"><h3>{{bets[i][5].minute - date.minute}} minutes left</h3></div>
         {%endif%}
-        {%endif%}
-        <div class="bet"><img src="../static/img/{{bets[i][3]}}" alt="betImage">
+        <div class="bet"><img src="../../static/img/{{bets[i][3]}}" alt="betImage">
         <label>Bet: {{bets[i][1]}}</label>
         <label>Reward:{{bets[i][4]}} Coins</label>
+        
         <a href="/editPanel/edit/{{bets[i][0]}}">Edit</a>
         </div>
         </div>

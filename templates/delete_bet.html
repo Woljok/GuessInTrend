@@ -1,0 +1,43 @@
+{%extends "layout.html"%}
+{%block title%} - Delete Bet {%endblock%}
+{%block content%} 
+<div class="container-deleteBet">
+    <div class="addBet-left">
+        <div class="left-items">
+            <a href="/editPanel/edit">
+                <h3>Edit bet</h3>
+            </a>
+        </div> 
+        <div class="left-items">
+            <a href="/editPanel/add">
+                <h3>Add a bet</h3>
+            </a>
+        </div> 
+            <div class="left-items">
+                <a href="/editPanel/delete">
+                    <h3>Delete a bet</h3>
+                </a>
+            </div> 
+    </div>
+    <div class="deleteBet-right">
+        <h3>Choose bets to delete</h3>
+        <form id="delete-bet" action="" method="POST">
+            <div class="form-deleteBet">
+                {%for i in range(0,lenBets)%}
+                <div class="bet-card-delete">
+                    {% if date > bets[i][5]%}
+                    <h4>Bet time finished</h4>
+                    {%else%}
+                    <h3>{{bets[i][5]}}</h3>
+                    {%endif%}
+                    <label>Question: {{bets[i][1]}}</label>
+                    <input type="checkbox" name="betDelete" value="{{bets[i][0]}}">
+                </div>
+                {%endfor%}
+                <button class="deleteBet">Delete</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{%endblock%}

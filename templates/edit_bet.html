@@ -1,8 +1,24 @@
 {% extends "layout.html" %}
-{% block title%} Edit {% endblock %}
+{% block title%} Edit Bet {% endblock %}
 {% block content%}
-
-
+<div class="container-addBet">
+<div class="addBet-left">
+    <div class="left-items">
+        <a href="/editPanel/edit">
+            <h3>Edit bet</h3>
+        </a>
+    </div> 
+    <div class="left-items">
+        <a href="/editPanel/add">
+            <h3>Add a bet</h3>
+        </a>
+    </div> 
+    <div class="left-items">
+        <a href="/editPanel/delete">
+            <h3>Delete a bet</h3>
+        </a>
+    </div> 
+</div>
 <div class="container-editTheBet">
     <div class="form-container-editTheBet">
         <form id="editTheBet" action="" method="POST" enctype="multipart/form-data">
@@ -20,21 +36,29 @@
             <label>Change reward: <input type="number" name="reward" value="{{bet[4]}}">
             </label>
             <label>Set Answer:</label>
+            {% if bet[2]==0 or bet[2]==1 %}
+            <div class="answered">You already set answer. = {{bet[2]}}</div>
+            {%else%}
             <label class="checkbox">Don't set</label><input type="radio" name="radio" value="dont">
-            <label class="checkbox">No </label><input type="radio" name="radio" value="no">
-            <label class="checkbox">Yes </label><input type="radio" name="radio" value="yes">
+            <label class="checkbox">No </label><input type="radio" name="radio" value="1">
+            <label class="checkbox">Yes </label><input type="radio" name="radio" value="0">
             <button class="saveBet">Save</button>
+            {%endif%}
+            
         </div>
         </form>
     </div>
     <div class="right-editBet">
         <div class="imagePreview">
-            <p id="imagePreview-text">Image</p> <img src="" alt="preview" class="imagePreview_img" id="imagePreview_img"></h3>
+            <div class="imageeditbet">
 
+            
+            <p id="imagePreview-text">Image</p> <img src="" alt="preview" class="imagePreview_img" id="imagePreview_img"></h3>
+        </div>
         </div>
     </div>
 </div>
-
+</div>
 
 
 

@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% block title%} Edit {% endblock %}
+{% block title%} Edit Profile{% endblock %}
 {% block content%}
 
 <div class="container-edit">
@@ -43,8 +43,9 @@
         </div>
 
         <div class="edit-items-submit">
-        <button type="submit">Kaydet</button>
-        </div>
+        <button name="change" type="submit" value="changeProfile">Save</button>
+        <button name="change" id="deleteP" type="submit" value="deleteProfile">Delete your profile!</button>
+    </div>
     </form>
     <h1>{{message}}</h1>
 

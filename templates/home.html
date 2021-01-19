@@ -1,8 +1,12 @@
 {%extends "layout.html"%}
 {%block title%} Home {%endblock%}
 {%block content%}
-
-    
-
+<div class="home-container">
+    <div>
+    <h1>Welcome {{user[1]}}!</h1>
+    <h2>Are you ready to guess some bets?</h2>
+    <a href="/bets"><button >Go to Bets</button></a>
+</div>
+</div>
 {%endblock%}
 

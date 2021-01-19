@@ -14,13 +14,10 @@
     <label class="label-login-button" for="submit">
     <button class="formInput-login-submit" id="login_form" type="submit">Login</button>
     </label>
+    <label class="registerLogin"> You don't have an account? <a href="/register">Register!</a></label>
+    </label>
     <div class="errorMessage">
-    {% if message == 1 %}
-    <p>asdasdasdasdasdsa</p>
-    {%endif%}
-    {% if message== 2 %}
-    <p class="login-form-signup"><a href="{{ url_for('register') }}">SIGN UP!</a>  </p>
-    {%endif%}
+    <p>{{message}}</p>
     </div>
 </form>
 </div>
