@@ -209,7 +209,6 @@ def bets_show(betId):
     db.cursor = db.con.cursor(buffered=True)
     comDelete = request.form.getlist("delete")
     commentarea = request.form.get("commentArea")
-    print(commentarea)
     print(comDelete)
     if request.method == "GET":   
         print("asdsad")   
