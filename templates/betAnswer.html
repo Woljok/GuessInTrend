@@ -30,14 +30,15 @@
         <div class="container-betShow-comment">
             <h3 id="commentsh3">Comments</h3>
             <div class="comments">
-                <form id="delete" action="" method="POST">
+                
                 {%for m in range(lenCom)%}
                 <div class="commentUser">
                     <label class="timeComment">{{comments[m][4]}}</label>
                     <label class="userComment">{{comments[m][5]}}</label>
                     <textarea rows="5" cols="50" class="textComment">{{comments[m][3]}}</textarea>
                     {%if session['admin'] == True%}
-                    <label class="deleteCom">Delete<input type="checkbox" name="delete" value="{{comments[m][0]}}" form="delete"  ></label>
+                    <form id="delete" action="" method="POST">
+                    <div class="deleteCom"><label>Delete<input type="checkbox" name="delete" value="{{comments[m][0]}}" form="delete"  ></label></div>
                     {%endif%}
                 </div>
                 {%endfor%}
@@ -51,7 +52,6 @@
                     <textarea rows="5" cols="50" name="commentArea" form="commentarea" placeholder="Add comment!"></textarea>
                     <button class="addComment-button" value="addComment" name="showBet">ADD!</button>
                 </form>
-                
             </form>
             </div>
         </div>
