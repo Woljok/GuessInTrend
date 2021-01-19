@@ -16,11 +16,17 @@ body{
 footer{
     position: fixed;
     top: 95%;
-    left: 47%;
+    left: 44%;
 }
 
 
-
+.wrong{
+    position: absolute;
+    top: 30%;
+    left: 40%;
+    color: rgb(255, 155, 118);
+    font-weight: bold;
+}
 
 
 
@@ -37,6 +43,7 @@ nav{
    height: -10px;
    display: flex;
    justify-content: center;
+   z-index: 2;
 }
 
 .navbar{
@@ -93,6 +100,13 @@ nav p{
     display: inline-block;
 }
 
+.navbar .menu{
+    position: absolute;
+
+    display: none;
+}
+
+
 
 
 /* -------------------------------------- NAV END ----------------------------------------------
@@ -106,18 +120,640 @@ nav p{
     position: absolute;
     width: 100%;
     height: 100%;
+}
+.container-index div{
+    width: 60%;
+    left: 40%;
+    top: 20%;
+    position: relative;
+}
+
+.container-index h1{
+    margin-left: 5%;
+    font-weight: bold;
+    color: rgb(255, 155, 118);
+}
+.container-index h3{
+    margin-left:4%;
+    color: rgb(167, 167, 167);
+    font-weight: bold;
+}
+
+.container-index button{
+    display: inline-block;
+    margin-top: 5%;
+    margin-left: 4%;
+    padding: 7px 20px 7px 20px;
+    background-color: rgb(255,148,109);
+    border: 1px solid rgb(255,148,109);
+    color: white;
+    transition: 1s;
+    cursor: pointer;
+}
+.container-index button:hover{
+    background-color: white;
+    color: rgb(255,148,109);
+    border: 1px solid rgb(255,148,109);
+}
+
+
+
+
+/*************************HOME PAGE************************
+*/
+
+.home-container{
+    position: absolute;
+    width: 60%;
+    height: 80%;
+    top: 20%;
+    left: 30%;
+
+}
+
+.home-container h1{
+    font-weight: bold;
+    margin-left: 5%;
+    color: rgb(255, 155, 118);
+}
+
+.home-container h2{
+    font-weight: bold;
+    color: rgb(177, 176, 176);
+}
+.home-container div{
+    margin-left: 15%;
+}
+
+.home-container button{
+    margin-top: 5%;
+    margin-left: 16%;
+    padding: 7px 20px 7px 20px;
+    background-color: rgb(255,148,109);
+    border: 1px solid rgb(255,148,109);
+    color: white;
+    transition: 1s;
+    cursor: pointer;
+}
+
+.home-container button:hover{
+    background-color: white;
+    color: rgb(255,148,109);
+    border: 1px solid rgb(255,148,109);
+}
+
+
+
+
+
+
+
+
+
+/*-------------------------------------------------------------------
+*/
+
+
+/*********************** BETS ***********************
+*/
+.container-bets{
+    position: absolute;
+    width: 100%;
+    height: 80%;
+    top: 15%;
+}
+
+.container-bets-left{
+    position: absolute;
+    border-right: 2px solid #ddd;
+    border-radius: 5px;
+    width: 15%;
+    margin-left: 5%;
+    display: inline-block;
+}
+.container-bets-right{
+    position: relative;
+    display: inline-block;
+    width: 70%;
+    min-height: 800px;
+
+    margin-left: 25%;
+
+}
+
+.container-bets .container-bets-left label{
+    display: block;
+    padding: 5px;
+    margin-bottom: 10%;
+    font-weight: bold;
+    font-size: large;
+    border-bottom: 2px solid #ccc;
+    width: 50%;
+    padding-left: 15%;
+    border-radius: 5px;
+}
+
+.container-bets .container-bets-left a{
+    transition:1s;
+}
+.container-bets .container-bets-left a:hover{
+    color: #ff946d;
+    font-size: larger;
+}
+.container-bets .container-bets-left a{
+    text-decoration: none;
+    color: black;
+}
+
+
+
+.container-bets-right .bet-card-bets{
+
+    padding: 3%;
+    transition: 1s;
+    margin-bottom: 5%;
+    -webkit-box-shadow: 0px 0px 21px 1px rgba(171,164,171,1);
+    -moz-box-shadow: 0px 0px 21px 1px rgba(171,164,171,1);
+    box-shadow: 0px 0px 21px 1px rgba(171,164,171,1);
+}
+
+.container-bets-right .bet-card-bets:hover{
+    padding: 5%;
+    
+}
+
+.container-bets-right .bet-card-bets-over{
+    -webkit-box-shadow: 0px 0px 21px 1px rgba(171,164,171,1);
+    -moz-box-shadow: 0px 0px 21px 1px rgba(171,164,171,1);
+    box-shadow: 0px 0px 21px 1px rgba(171,164,171,1);
+    padding: 3%;
+    transition: 1s;
+    margin-bottom: 5%;
+}
+
+
+
+
+.container-bets-right .bet-card-bets-over:hover{
+    padding: 5%;
+    
+}
+
+
+.endBet{
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    color: rgb(255, 155, 118);
+    font-weight: bold;
+    
+}
+.rewardBet{
+    margin-left: 70%;
+    color: saddlebrown;
+}
+
+.questionBet{
+    color: rgb(190, 186, 186);
+}
+
+.container-bets-right a{
+    text-decoration: none;
+    color: black;
+}
+
+
+
+
+
+
+
+
+/******************************** BETS SHOW ANSWER PAGE ********************
+*/
+
+.container-betsShow-right{
+    position: absolute;
+    width: 70%;
+    min-height: 800px;
+    margin-left: 25%;
+}
+.container-betShow-right-bet{
+    position: absolute;
+    display: inline-block;
+    width: 50%;
+}
+.container-betsShow-right img{
+    width: 100%;
+}
+.container-betsShow-right label{
+    display: block;
+}
+.answerPage-endTime{
+    color: rgb(255, 155, 118);
+    font-weight: bold;
+    margin-bottom: 5%;
+}
+.answerPage-reward{
+    margin-left: 37%;
+    font-weight: bold;
+    margin-bottom: 5%;
+    color: saddlebrown;
+}
+.answerPage-question{
+    color: rgb(107, 106, 106);
+    font-weight: bold;
+    margin-top: 5%;
+}
+
+.container-betShow-right-bet label{
+    display: inline-block;
+    background-color: rgb(255, 255, 255);
+    padding: 10px 20px;
+    font-family: sans-serif, Arial;
+    font-size: 16px;
+    border: 2px solid #444;
+    border-radius: 4px;
+    margin-left: 20%;
+    margin-top: 5%;
+
+}
+
+.answerPage-button{
+    display: block;
+    margin-top: 10%;
+    padding:10px;
+    background-color: rgb(209, 207, 207);
+    border:none;
+    cursor: pointer;
+    margin-left: 35%;
+    transition: 1s;
+}
+
+.answerPage-button:hover{
+    background-color: rgb(255, 155, 118);
+}
+
+.answerPage-answer:hover {
+    background-color: #dfd;
+}
+
+.answerPagePlayed{
+    margin-left: 35%;
+    margin-top: 10%;
+}
+
+
+.container-betShow-comment{
+    height: 850px;
+    display: inline-block;
+    margin-left: 60%;
+    width: 35%;
+    -webkit-box-shadow: 0px 0px 21px 1px rgba(171,164,171,1);
+    -moz-box-shadow: 0px 0px 21px 1px rgba(171,164,171,1);
+    box-shadow: 0px 0px 21px 1px rgba(171,164,171,1);
+    
+}
+.comments::-webkit-scrollbar{
+    display: none;
+}
+
+.comments{
+    overflow: scroll;
+    height: 600px;
+    width: 100%;
+}
+
+#commentsh3{
+    margin-left: 40%;
+    font-weight: bold;
+    color: rgb(255, 155, 118);
+    
+}
+.comments .commentUser{
+    -webkit-box-shadow: 0px 0px 21px 0px rgba(171,164,171,1);
+    -moz-box-shadow: 0px 0px 21px 0px rgba(171,164,171,1);
+    box-shadow: 0px 0px 21px 0px rgba(171,164,171,1);
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.timeComment{
+    padding-top: 5%;
+    font-size: smaller;
+    margin-bottom: 2%;
+    margin-left: 3%;
+}
+
+.userComment{
+    font-weight: bold;
+    margin-left: 3%;
+    color: rgb(255, 155, 118);
+}
+
+
+.textComment{
+    margin-top: 5%;
+    margin-left: 3%;
+    margin-bottom: 5%;
+    max-width: 100%;
+    border: none;
+    color: rgb(134, 134, 134);
+}
+
+
+.addComment-button{
+    display: block;
+    margin-top: 2%;
+    padding: 10px 25px;
+    background-color: rgb(209, 207, 207);
+    border:none;
+    cursor: pointer;
+    margin-left: 40%;
+    transition: 1s;
+}
+.form-commentarea textarea{
+    margin-left: 3%;
+    -webkit-box-shadow: 0px 0px 3px 0px rgba(171,164,171,1);
+-moz-box-shadow: 0px 0px 3px 0px rgba(171,164,171,1);
+box-shadow: 0px 0px 3px 0px rgba(171,164,171,1);
+    margin-top: 3%;
+}
+
+.addComment-button:hover{
+    background-color: rgb(255, 155, 118);
+}
+
+.deleteComment-button{
+    display: block;
+    margin-top: 2%;
+    padding: 10px 25px;
+    background-color: rgb(209, 207, 207);
+    border:none;
+    cursor: pointer;
+    margin-left: 39%;
+    transition: 1s;
+}
+
+.deleteComment-button:hover{
+    background-color: rgb(255, 155, 118);
+}
+
+
+
+/*  -------------------------------- EDIT BET PAGE ----------------------
+*/
+
+.container-editBet{
+    position: absolute;
+    width: 100%;
+    top: 20%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.container-index div a{
-   text-decoration: none;   
-   padding: 20px;
-   border: 1px solid #FF7F50;
-   margin-top: 10px;
+.container-editBet .container-left{
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 20%;
+    border-left: 2px solid rgb(255, 155, 118);
+    border-right: 2px solid rgb(255, 155, 118);
+    border-radius: 5px;
+}
+
+.container-editBet .container-right{
+    width: 60%;
+    margin-left: 10%;
+}
+
+
+.left-items h3{
+    padding: 20px 15px;
+}
+
+.left-items a {
+    text-decoration: none;
+    color: black;
+}
+
+.left-items a:hover{
+    color: #FF7F50;
+}
+
+
+
+/* ------------------------- ADD BET----------
+*/
+.container-addBet{
+    position: absolute;
+    width: 100%;
+    top: 20%;
+}
+.addBet-left{
+    width: 20%;
+    display: inline-block;
+    min-width: 100px;
+    min-height: 100px;
+    margin-left: 5%;
+    border-right: 2px solid rgb(255, 155, 118);
+    border-radius: 10px;
+}
+
+.addBet-right{
+    position: absolute;
+    width: 65%;
+    display: inline-block;
+    min-width: 100px;
+    min-height: 100px;
+    margin-left: 5%;
+    margin-bottom: 15%;
+}
+
+
+.addBet-right-right{
+    position: relative;
+    min-width: 100px;
+    width: 40%;
+    margin-left: 5%;
+    display: inline-block;
+
+}
+
+.addBet-right-left{
+    margin-left: 5%;
+    position: absolute;
+    min-width: 100px;
+    width: 40%;
+    display: inline-block;
+}
+
+.addBet-right-right label{
+    color: black;
+    font-weight: bold;
+}
+
+.addBet-form-container label{
+    padding: 5%;
+    display:block;
    
 }
+.addBet-form-container input{
+    margin-bottom: 5%;
+   
+}
+
+.container-addBet .imagePreview{
+    width: 300px;
+    min-height: 100px;
+    border: 2px solid #dddd;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ccc;
+    font-weight: bold;
+}
+
+.imagePreview img{
+    display: none;
+    width: 100%;
+}
+
+.addBet-form-container button{
+    position: relative;
+    margin-left: 70%;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    transition: 0.5s;
+
+}
+.addBet-form-container button:hover{
+    background-color: rgb(255, 155, 118);
+}
+
+.addBet-form-container input[type="text-area"]{
+    overflow-y: scroll;
+    
+}
+.addBet-form-container .checkbox{
+    display: inline-block;
+}
+
+/* -------------------------------- SHOW BETS ------------------------
+*/
+ 
+.container-showBets{
+    width: 60%;
+    position: absolute;
+    margin-left: 5%;
+    min-height: 200px;
+    display: inline-block;
+}
+.container-showBets .bet-container{
+    width: 100%;
+    min-height: 100px;
+}
+
+.container-showBets img{
+    width: 200px;
+
+}
+
+
+
+
+
+/*  -------------------------EDIT BET --------------
+*/
+.form-container-editTheBet{
+    position: absolute;
+    width: 60%;
+    top: 10%;
+    left: 30%;
+    
+}
+.container-editTheBet label{
+    display: block;
+    margin: 3% 0%;
+}
+
+.container-editTheBet .form-container-editTheBet{
+    
+    border-top:2px solid #ccc;
+    border-radius: 4px;
+    
+}
+
+.container-editTheBet .form-container-editTheBet .form-editTheBet{
+    margin-left: 25%;
+}
+
+
+.container-editTheBet img{
+    width: 30%;
+    margin-top: 5%;
+}
+
+.container-editTheBet .checkbox{
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.container-editTheBet button{
+    display: block;
+    margin-left: 25%;
+}
+
+.right-editBet .imagePreview{
+    left: 75%;
+    bottom: 15%;
+    position: absolute;
+}
+.right-editBet .imagePreview img{
+    width: 100%;
+}
+
+
+/*  -----------------------DELETE BET----------------
+*/
+
+.container-deleteBet{
+    position: absolute;
+    top: 20%;
+    width: 100%;
+    height: 80%;
+}
+
+.deleteBet-right{
+    display: inline-block;
+    position: absolute;
+    height: 80%;
+    margin-left: 5%;
+    width: 60%;
+    overflow: scroll;
+}
+.deleteBet-right::-webkit-scrollbar{
+    display: none;
+}
+.deleteBet-right .bet-card-delete{
+    min-height: 100px;
+    margin: 5% 5%;
+}
+.bet-card-delete{
+    border-bottom: 1px solid rgb(255, 155, 118);
+}
+.deleteBet-right h3{
+    color: rgb(255, 155, 118);
+    font-weight: bold;
+}
+
+
+
+
+
+
+
 
 
 
@@ -214,7 +850,7 @@ nav p{
     color: rgb(255, 169, 138);
 }
 .container-login .form-login p{
-    margin-top: 5%;
+    margin-top: 10%;
     text-align: center;
     
     color: rgb(255, 169, 138);
@@ -274,7 +910,27 @@ nav p{
     background-color: rgb(255, 169, 138);
 }
 
+.registerLogin{
+    display: block;
+    margin-top: 4%;
+    margin-left: 10%;
+    font-weight: bold;
+    color: rgb(190, 188, 188);
+}
 
+.registerLogin a{
+    color: rgb(190, 188, 188);
+    text-decoration-color: rgb(255, 155, 118);
+}
+.registerLogin a:hover{
+    color: rgb(255, 155, 118);
+}
+
+
+.errorMessage h3 {
+    font-weight: bold;
+    color: rgb(255, 155, 118);
+}
 /* ---------------------------- LOGIN PAGE ENDS ----------------------
 */
 
@@ -543,7 +1199,23 @@ nav p{
 .container-edit .form-area button:hover{
     background-color: white;
     color: rgb(255,148,109);
-    border:1px solid rgb(255,148,109);
+    border: 1px solid rgb(255,148,109);
+}
+#deleteP {
+    margin-top: 10%;
+    margin-bottom: 5%;
+    margin-left: 23%;
+    padding: 7px 20px 7px 20px;
+    background-color:  rgb(255,148,109);
+    border: 1px solid rgb(255,148,109);
+    color: white;
+    transition: 1s;
+    cursor: pointer; 
+}
+#deleteP:hover{
+    background-color: white;
+    color: rgb(255,148,109);
+    border: 1px solid rgb(255,148,109);
 }
 
 .container-edit input{
@@ -567,4 +1239,67 @@ nav p{
 }
 .container-edit label{
     color: rgb(255,148,109);
+}
+
+
+
+
+/*------------------------------- FAQ---------------------------------
+*/
+
+.container-faq{
+    width: 80%;
+    height: 80%;
+    top: 15%;
+    left: 20%;
+    position: absolute;
+}
+
+.faq-right{
+    position: absolute;
+    left: 35%;
+    width: 40%;
+    height: 400px;
+    -webkit-box-shadow: -2px 0px 15px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: -2px 0px 15px -6px rgba(0,0,0,0.75);
+    box-shadow: -2px 0px 15px -6px rgba(0,0,0,0.75);
+}
+.faq-right h1{
+    font-weight: bold;
+    color: rgb(255, 155, 118);
+    margin-left: 5%;
+}
+
+.faq-right h3{
+    color: rgb(180, 179, 179);
+    margin-left: 5%;
+    margin-top: 4%;
+}
+
+.faq-right textarea{
+    margin-top: 5%;
+    margin-left: 13%;
+}
+
+.form-container-faq .buttonFaq {
+    margin-top: 10%;
+    margin-bottom: 5%;
+    margin-left: 40%;
+    padding: 7px 20px 7px 20px;
+    background-color:  rgb(255,148,109);
+    border: 1px solid rgb(255,148,109);
+    color: white;
+    transition: 1s;
+    cursor: pointer; 
+    display: block;
+}
+.form-container-faq .buttonFaq:hover{
+    background-color: white;
+    color: rgb(255,148,109);
+    border: 1px solid rgb(255,148,109);
+}
+
+.form-container-faq p{
+    margin-left: 3%;
+    color: rgb(168, 164, 164);
 }
